@@ -2,35 +2,18 @@
 
 const euclid = function (...args) {
 	args = args.map(item => Math.abs(item));
-	args.sort((a,b) => a - b);
 
-	let min = 0;
+	let a = args[0];
 
-	for (let i = 0; i < args.length; i++) {
-		if(args[i] !== 0) {
-		min = args[i];
-		break;
+	for (let i = 1; i < args.length; i++) {
+		let b = args[i];
+
+		while (b !== 0) {
+			let tmp = a % b;
+			a = b;
+			b = tmp;
 		}
 	}
 
-	if (min === 0) {
-		return;
-	}
-
-	for (let i = min; i > 1; i--) {
-		let state = true;
-
-		args.forEach(item => {
-			if (item % i !== 0) {
-				state = false;
-		 		return;
-			}
-		});
-
-		if (state) {
-			return i;
-		}
-	}
-
-	return 1;
+	return a !== 0 ? a : undefined;
 }
