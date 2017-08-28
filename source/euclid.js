@@ -1,19 +1,13 @@
 'use strict';
 
 const euclid = function (...args) {
-	args = args.map(item => Math.abs(item));
+	let nod = Math.abs(args[0]);
 
-	let a = args[0];
-
-	for (let i = 1; i < args.length; i++) {
-		let b = args[i];
-
-		while (b !== 0) {
-			let tmp = a % b;
-			a = b;
-			b = tmp;
+	args.map(item => Math.abs(item)).forEach(item => {
+		while (item !== 0) {
+			[nod, item] = [item, nod % item];
 		}
-	}
+	});
 
-	return a !== 0 ? a : undefined;
+	return nod !== 0 ? nod : undefined;
 }
